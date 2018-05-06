@@ -1,0 +1,43 @@
+{
+    "manifest_version":2,
+
+    "name":"KOSHIAN 返信フォームを固定 改",
+
+    "version":"1.0.0",
+    
+    "applications": {
+        "gecko": {
+            "id": "koshian_float_form_kai@akoya-tomo.github.io",
+            "update_url": "https://raw.githubusercontent.com/akoya-tomo/koshian_float_form_kai/master/updates.json"
+        }
+    },
+    
+    "permissions":[
+        "storage"
+    ],
+
+    "description":"返信フォームの位置を調整します",
+
+    "icons":{
+        "48":"icons/icon-48.png"
+    },
+
+    "author": "akoya_tomo",
+
+    "homepage_url": "https://github.com/akoya-tomo/koshian_float_form_kai/",
+
+    "content_scripts":[
+        {
+            "matches":["*://*.2chan.net/*/res/*"],
+            "js":["res.js"]
+        }
+    ],
+
+    "web_accessible_resources":[
+        "icons/*.png"
+    ],
+
+    "options_ui":{
+        "page": "options.html"
+    }
+}
