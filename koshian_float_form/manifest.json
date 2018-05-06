@@ -1,0 +1,38 @@
+{
+    "manifest_version":2,
+
+    "name":"KOSHIAN 返信フォームを固定",
+
+    "version":"1.0.6",
+    
+    "applications": {
+        "gecko": {
+            "id": "{b6ae1c8a-a804-452b-af2a-2e0da5526d8e}"
+        }
+    },
+    
+    "permissions":[
+        "storage"
+    ],
+
+    "description":"返信フォームの位置を調整します",
+
+    "icons":{
+        "48":"icons/icon-48.png"
+    },
+
+    "content_scripts":[
+        {
+            "matches":["*://*.2chan.net/*/res/*"],
+            "js":["res.js"]
+        }
+    ],
+
+    "web_accessible_resources":[
+        "icons/*.png"
+    ],
+
+    "options_ui":{
+        "page": "options.html"
+    }
+}

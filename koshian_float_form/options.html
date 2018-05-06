@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <p>
+    <input id="float_height" type="number">
+    <label for="float_height">フォームの高さ</label>
+  </p>
+
+  <p>
+    <input id="no_hide_if_text" type="checkbox">
+    <label for="no_hide_if_text">フォームに入力中は隠さない</label>
+  </p>
+
+  <fieldset style="min-width: min-content;">
+    <legend>
+      <input id="use_mouse_check" type="checkbox">
+      <label for="use_mouse_check">マウス位置で表示を切り替える</label>
+    </legend>
+
+    <fieldset style="min-width: min-content;">
+      <legend>
+        <input id="range_type_pixel" type="radio" name="range_type">
+        <label for="range_type_pixel">ピクセル単位で判定</label>
+      </legend>
+      <p>
+        右から
+        <br>
+        <input id="show_range_x_in_pixel" type="number" min="0">
+        <label for="show_range_x_in_pixel">px より左で表示</label>
+        <br>
+        <input id="hide_range_x_in_pixel" type="number" min="0">
+        <label for="hide_range_x_in_pixel">px より右で隠す</label>
+      </p>
+      <p>
+        下から
+        <br>
+        <input id="show_range_y_in_pixel" type="number" min="0">
+        <label for="show_range_y_in_pixel">px より下で表示</label>
+        <br>
+        <input id="hide_range_y_in_pixel" type="number" min="0">
+        <label for="hide_range_y_in_pixel">px より上で隠す</label>
+      </p>
+    </fieldset>
+
+    <fieldset style="min-width: min-content;">
+      <legend>
+        <input id="range_type_percent" type="radio" name="range_type">
+        <label for="range_type_percent">パーセント単位で判定</label>
+      </legend>
+      <p>
+        右から
+        <br>
+        <input id="show_range_x_in_percent" type="number" min="0" max="100">
+        <label for="show_range_x_in_percent">% より左で表示</label>
+        <br>
+        <input id="hide_range_x_in_percent" type="number" min="0" max="100">
+        <label for="hide_range_x_in_percent">% より右で隠す</label>
+      </p>
+      <p>
+        下から
+        <br>
+        <input id="show_range_y_in_percent" type="number" min="0" max="100">
+        <label for="show_range_y_in_percent">% より下で表示</label>
+        <br>
+        <input id="hide_range_y_in_percent" type="number" min="0" max="100">
+        <label for="hide_range_y_in_percent">% より上で隠す</label>
+      </p>
+    </fieldset>
+  </fieldset>
+
+  <p>
+    <label for="default_hide_pixel">画面が</label>
+    <input id="default_hide_pixel" type="number" min="0">
+    <label for="default_hide_pixel">px以下ならスレを開いたときに隠す</label>
+  </p>
+
+  <p>
+    <input type="button" value="Save">
+  </p>
+
+  <script src="options.js"></script>
+
+</body>
+
+</html>
