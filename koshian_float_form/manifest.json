@@ -1,13 +1,14 @@
 {
     "manifest_version":2,
 
-    "name":"KOSHIAN 返信フォームを固定",
+    "name":"KOSHIAN 返信フォームを固定 改",
 
-    "version":"1.0.6",
+    "version":"1.0.0",
     
     "applications": {
         "gecko": {
-            "id": "{b6ae1c8a-a804-452b-af2a-2e0da5526d8e}"
+            "id": "koshian_float_form_kai@akoya-tomo.github.io",
+            "update_url": "https://raw.githubusercontent.com/akoya-tomo/koshian_float_form_kai/master/updates.json"
         }
     },
     
@@ -20,6 +21,10 @@
     "icons":{
         "48":"icons/icon-48.png"
     },
+
+    "author": "akoya_tomo",
+
+    "homepage_url": "https://github.com/akoya-tomo/koshian_float_form_kai/",
 
     "content_scripts":[
         {
