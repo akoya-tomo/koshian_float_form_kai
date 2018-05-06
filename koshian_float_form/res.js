@@ -1,3 +1,4 @@
+const DEFAULT_FORM_WIDTH = 0;
 const DEFAULT_FLOAT_HEIGHT = 100;
 const DEFAULT_NO_HIDE_IF_TEXT = true;
 const DEFAULT_DEFAULT_HIDE_PIXEL = 1000;
@@ -11,6 +12,7 @@ const DEFAULT_SHOW_RANGE_X_IN_PERCENT = 25;
 const DEFAULT_HIDE_RANGE_X_IN_PERCENT = 30;
 const DEFAULT_SHOW_RANGE_Y_IN_PERCENT = 50;
 const DEFAULT_HIDE_RANGE_Y_IN_PERCENT = 60;
+let form_width = DEFAULT_FORM_WIDTH;
 let float_height = DEFAULT_FLOAT_HEIGHT;
 let no_hide_if_text = DEFAULT_NO_HIDE_IF_TEXT;
 let default_hide_pixel = DEFAULT_DEFAULT_HIDE_PIXEL;
@@ -139,11 +141,21 @@ function setFormStyle(form_display) {
     form.style.position = "fixed";
     form.style.right = "2px";
     form.style.bottom = `${float_height + 30}px`;
+    if (form_width > 0) {
+        form.style.maxWidth = `${form_width}px`;
+        form.style.width = `${form_width}px`;
+        textarea.style.width = "100%";
+        textarea.style.boxSizing = "border-box";
+    } else {
+        form.style.maxWidth = "";
+        form.style.width = "";
+        textarea.style.width = "";
+    }
     form.style.display = form_display;
 }
 
 function show() {
-    setFormStyle("block");
+    setFormStyle("table");
     toggle.value = "隠す";
 }
 
@@ -161,6 +173,7 @@ function onError(error) {
 }
 
 function onLoadSetting(result) {
+    form_width = Number(safeGetValue(result.form_width, DEFAULT_FORM_WIDTH));
     float_height = Number(safeGetValue(result.float_height, DEFAULT_FLOAT_HEIGHT));
     no_hide_if_text = safeGetValue(result.no_hide_if_text, DEFAULT_NO_HIDE_IF_TEXT);
     default_hide_pixel = safeGetValue(result.default_hide_pixel, DEFAULT_DEFAULT_HIDE_PIXEL);
@@ -183,6 +196,7 @@ function onChangeSetting(changes, areaName) {
         return;
     }
 
+    form_width = Number(safeGetValue(changes.form_width.newValue, form_width));
     float_height = Number(safeGetValue(changes.float_height.newValue, float_height));
     no_hide_if_text = safeGetValue(changes.no_hide_if_text.newValue, no_hide_if_text);
     default_hide_pixel = safeGetValue(changes.default_hide_pixel.newValue, DEFAULT_DEFAULT_HIDE_PIXEL);
@@ -196,8 +210,19 @@ function onChangeSetting(changes, areaName) {
     show_range_y_in_percent = safeGetValue(changes.show_range_y_in_percent.newValue, show_range_y_in_percent);
     hide_range_y_in_percent = safeGetValue(changes.hide_range_y_in_percent.newValue, hide_range_y_in_percent);
 
-    form.style.bottom = `${float_height + 20}px`;
+    form.style.bottom = `${float_height + 30}px`;
     toggle.style.bottom = `${float_height}px`;
+    if (form_width > 0) {
+        form.style.maxWidth = `${form_width}px`;
+        form.style.width = `${form_width}px`;
+        textarea.style.width = "100%";
+        textarea.style.boxSizing = "border-box";
+    } else {
+        form.style.maxWidth = "";
+        form.style.width = "";
+        textarea.style.width = "";
+    }
+
 }
 
 function main() {

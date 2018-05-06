@@ -1,3 +1,4 @@
+const DEFAULT_FORM_WIDTH = 0;
 const DEFAULT_FLOAT_HEIGHT = 100;
 const DEFAULT_DEFAULT_HIDE_PIXEL = 1000;
 const DEFAULT_USE_MOUSE_CHECK = true;
@@ -45,6 +46,7 @@ function safeGetValue(value, default_value) {
 
 function saveOptions() {
   browser.storage.local.set({
+    form_width: document.querySelector("#form_width").value,
     float_height: document.querySelector("#float_height").value,
     no_hide_if_text: document.querySelector("#no_hide_if_text").checked,
     default_hide_pixel: document.querySelector("#default_hide_pixel").value,
@@ -62,6 +64,7 @@ function saveOptions() {
 }
 
 function setCurrentChoice(result) {
+  document.querySelector("#form_width").value = safeGetValue(result.form_width, DEFAULT_FORM_WIDTH);
   document.querySelector("#float_height").value = safeGetValue(result.float_height, DEFAULT_FLOAT_HEIGHT);
   document.querySelector("#no_hide_if_text").checked = safeGetValue(result.no_hide_if_text, DEFAULT_NO_HIDE_IF_TEXT);
   document.querySelector("#default_hide_pixel").value = safeGetValue(result.default_hide_pixel, DEFAULT_DEFAULT_HIDE_PIXEL);
