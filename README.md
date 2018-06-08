@@ -16,7 +16,7 @@
     0を設定するとオリジナル版と同じ幅で表示します。  
 
 ## インストール
-[GitHub](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.0.0/koshian_float_form_kai-1.0.0-an.fx.xpi)
+[GitHub](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.1.0/koshian_float_form_kai-1.1.0-an.fx.xpi)
 
 ※「接続エラーのため、アドオンをダウンロードできませんでした。」と表示されてインストール出来ないときはリンクを右クリックしてxpiファイルをダウンロードし、メニューのツール→アドオン（またはCtrl+Shift+A）で表示されたアドオンマネージャーのページにxpiファイルをドラッグ＆ドロップして下さい。  
 
@@ -30,6 +30,9 @@
   Firefox60以上では「プライバシーとセキュリティ」の「Cookieとサイトデータ」の「データを管理」からimg.2chan.netやmay.2chan.netのCookieを削除してください。
 
 ## 更新履歴
+* v1.1.0 2018-06-08
+  - 「KOSHIAN 引用メニュー 改」で引用操作したときに返信フォームを表示するように修正  
+    （要KOSHIAN 引用メニュー 改 v1.2以上）
 * v1.0.0 2018-05-06
   - KOSHIAN 返信フォームを固定 v1.0.6ベース
   - 返信フォームの幅を設定するオプションを追加

@@ -335,6 +335,11 @@ function main() {
             hide();
         }
     }, 1000);
+
+    document.addEventListener("KOSHIAN_quote", (e) => {
+        show();
+    });
+
 }
 
 browser.storage.local.get().then(onLoadSetting, onError);
