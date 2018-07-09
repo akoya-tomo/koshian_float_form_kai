@@ -1,9 +1,9 @@
-## <a name="koshian_fix_form_kai">KOSHIAN 返信フォームを固定 改
-このFirefoxアドオンはふたば☆ちゃんねるで返信フォームの位置を固定できる[Pachira](https://addons.mozilla.org/ja/firefox/user/anonymous-a0bba9187b568f98732d22d51c5955a6/)氏の[KOSHIAN 返信フォームを固定](https://addons.mozilla.org/ja/firefox/addon/koshian-float-form/)アドオンを改変したものです。  
+## <sub><img src="koshian_float_form/icons/icon-48.png"></sub> KOSHIAN 返信フォームを固定 改
+このFirefoxアドオンはふたば☆ちゃんねるで返信フォームの位置を固定できる[Pachira](https://addons.mozilla.org/ja/firefox/user/anonymous-a0bba9187b568f98732d22d51c5955a6/)氏の[KOSHIAN 返信フォームを固定](https://addons.mozilla.org/ja/firefox/addon/koshian-float-form/)を改変したものです。  
 返信フォームの幅を設定するオプションをオリジナル版に追加しています。  
 
 ※このアドオンはWebExtensionアドオン対応のFirefox専用となります。  
-※他のこしあんアドオン改変版やUserscriptは[こちら](https://github.com/akoya-tomo/futaba_auto_reloader_K/wiki/)の一覧からどうぞ。  
+※他のKOSHIAN改変版などのふたば閲覧支援ツールは[こちら](https://github.com/akoya-tomo/futaba_auto_reloader_K/wiki/)。  
 
 ## 機能
 * オリジナルの機能（KOSHIAN 返信フォームを固定）
@@ -16,12 +16,12 @@
     0を設定するとオリジナル版と同じ幅で表示します。  
 
 ## インストール
-[GitHub](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.1.0/koshian_float_form_kai-1.1.0-an.fx.xpi)
+**GitHub**  
+[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.1.0/koshian_float_form_kai-1.1.0-an.fx.xpi)
 
-※「接続エラーのため、アドオンをダウンロードできませんでした。」と表示されてインストール出来ないときはリンクを右クリックしてxpiファイルをダウンロードし、メニューのツール→アドオン（またはCtrl+Shift+A）で表示されたアドオンマネージャーのページにxpiファイルをドラッグ＆ドロップして下さい。  
+※「接続エラーのため、アドオンをダウンロードできませんでした。」と表示されてインストール出来ないときはインストールボタンを右クリックしてxpiファイルをダウンロードし、メニューのツール→アドオン（またはCtrl+Shift+A）で表示されたアドオンマネージャーのページにxpiファイルをドラッグ＆ドロップして下さい。  
 
 ## 注意事項
-* このアドオンはWebExtensionアドオン対応のFirefox専用です。  
 * 本アドオンを有効にしたときはオリジナル版を無効にするか削除して下さい。  
 * オリジナル版とは別アドオンなので設定は初期値に戻ります。  
   再度設定をお願い致します。  
