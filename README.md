@@ -1,5 +1,5 @@
 ## <sub><img src="koshian_float_form/icons/icon-48.png"></sub> KOSHIAN 返信フォームを固定 改
-このFirefoxアドオンはふたば☆ちゃんねるで返信フォームの位置を固定できる[Pachira](https://addons.mozilla.org/ja/firefox/user/anonymous-a0bba9187b568f98732d22d51c5955a6/)氏の[KOSHIAN 返信フォームを固定](https://addons.mozilla.org/ja/firefox/addon/koshian-float-form/)を改変したものです。  
+このFirefoxアドオンはふたば☆ちゃんねるで返信フォームの位置を固定できる[Pachira](https://addons.mozilla.org/ja/firefox/user/anonymous-a0bba9187b568f98732d22d51c5955a6/)氏の[KOSHIAN 返信フォームを固定](https://addons.mozilla.org/ja/firefox/addon/koshian-float-form/)の非公式改変版です。  
 返信フォームの幅を設定するオプションをオリジナル版に追加しています。  
 
 ※このアドオンはWebExtensionアドオン対応のFirefox専用となります。  
@@ -10,14 +10,17 @@
   - 返信フォームの位置を右下に固定
   - ボタンで返信フォームを開閉
   - マウスの位置で返信フォームを開閉
-* 追加された機能（KOSHIAN 返信フォームを固定 改）
+* 追加・修正された機能（KOSHIAN 返信フォームを固定 改）
   - 返信フォームの幅を設定（デフォルト：0 = 標準の幅）  
     返信フォームの幅を設定することができます。（単位：px）  
     0を設定するとオリジナル版と同じ幅で表示します。  
+  - \(New\) 返信フォーム内をクリックしたときに返信フォームが閉じないように修正  
+    返信フォーム内で文字入力以外の操作をしたときに意図せずに閉じないように修正しました。  
+    返信フォーム以外をクリックしたときは、今までと同じように返信フォームが閉じます。  
 
 ## インストール
 **GitHub**  
-[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.1.0/koshian_float_form_kai-1.1.0-an.fx.xpi)
+[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.2.0/koshian_float_form_kai-1.2.0-an+fx.xpi)
 
 ※「接続エラーのため、アドオンをダウンロードできませんでした。」と表示されてインストール出来ないときはインストールボタンを右クリックしてxpiファイルをダウンロードし、メニューのツール→アドオン（またはCtrl+Shift+A）で表示されたアドオンマネージャーのページにxpiファイルをドラッグ＆ドロップして下さい。  
 
@@ -30,6 +33,8 @@
   Firefox60以上では「プライバシーとセキュリティ」の「Cookieとサイトデータ」の「データを管理」からimg.2chan.netやmay.2chan.netのCookieを削除してください。
 
 ## 更新履歴
+* v1.2.0 2018-08-04
+  - 返信フォーム内をクリックしたときに返信フォームが閉じないように修正  
 * v1.1.0 2018-06-08
   - 「KOSHIAN 引用メニュー 改」で引用操作したときに返信フォームを表示するように修正  
     （要KOSHIAN 引用メニュー 改 v1.2以上）
