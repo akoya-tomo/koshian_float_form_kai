@@ -59,13 +59,6 @@ function onFocus(e){
 
 function onBlur(e){
     have_focus = false;
-
-    // 数瞬後に別の入力欄にフォーカスが移るかも
-    setTimeout(() => {
-        if(isShow() && isHidable()){
-            hide();
-        }
-    },10);
 }
 
 function isShow(){
@@ -162,6 +155,13 @@ function show() {
 function hide() {
     setFormStyle("none");
     toggle.value = "表示";
+}
+
+function isForm(target) {
+    for (let elm = target.parentElement; elm; elm = elm.parentElement) {
+        if (elm.id == "fm") return true;
+    }
+    return false;
 }
 
 function safeGetValue(value, default_value) {
@@ -340,6 +340,12 @@ function main() {
         show();
     });
 
+    document.addEventListener("click", (e) => {
+        if (e.target == toggle || e.target == icon_lock || e.target == icon_unlock) return;
+        if (!locked && isShow() && isHidable() && !isForm(e.target)) {
+            hide();
+        }
+    });
 }
 
 browser.storage.local.get().then(onLoadSetting, onError);
