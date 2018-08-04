@@ -336,9 +336,7 @@ function main() {
         }
     }, 1000);
 
-    document.addEventListener("KOSHIAN_quote", (e) => {
-        show();
-    });
+    document.addEventListener("KOSHIAN_quote", show);
 
     document.addEventListener("click", (e) => {
         if (e.target == toggle || e.target == icon_lock || e.target == icon_unlock) return;
