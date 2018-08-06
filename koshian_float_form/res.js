@@ -159,7 +159,7 @@ function hide() {
 
 function isForm(target) {
     for (let elm = target.parentElement; elm; elm = elm.parentElement) {
-        if (elm.id == "fm") return true;
+        if (elm.enctype == "multipart/form-data") return true;
     }
     return false;
 }

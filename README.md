@@ -20,7 +20,7 @@
 
 ## インストール
 **GitHub**  
-[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.2.0/koshian_float_form_kai-1.2.0-an+fx.xpi)
+[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.2.1/koshian_float_form_kai-1.2.1-an+fx.xpi)
 
 ※「接続エラーのため、アドオンをダウンロードできませんでした。」と表示されてインストール出来ないときはインストールボタンを右クリックしてxpiファイルをダウンロードし、メニューのツール→アドオン（またはCtrl+Shift+A）で表示されたアドオンマネージャーのページにxpiファイルをドラッグ＆ドロップして下さい。  
 
@@ -33,6 +33,8 @@
   Firefox60以上では「プライバシーとセキュリティ」の「Cookieとサイトデータ」の「データを管理」からimg.2chan.netやmay.2chan.netのCookieを削除してください。
 
 ## 更新履歴
+* v1.2.1 2018-08-06
+  - 板によって返信フォーム内をクリックしたときに返信フォームが閉じてしまう不具合を修正  
 * v1.2.0 2018-08-04
   - 返信フォーム内をクリックしたときに返信フォームが閉じないように修正  
 * v1.1.0 2018-06-08
