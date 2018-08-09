@@ -51,18 +51,18 @@ function setDisable() {
 function setText() {
   let show_range_x_text, hide_range_x_text, show_range_y_text, hide_range_y_text;
   if (document.getElementById("left_top").checked || document.getElementById("left_bottom").checked) {
-    show_range_x_text = "¶";
-    hide_range_x_text = "‰E";
+    show_range_x_text = "å·¦";
+    hide_range_x_text = "å³";
   } else {
-    show_range_x_text = "‰E";
-    hide_range_x_text = "¶";
+    show_range_x_text = "å³";
+    hide_range_x_text = "å·¦";
   }
   if (document.getElementById("left_top").checked || document.getElementById("right_top").checked) {
-    show_range_y_text = "ã";
-    hide_range_y_text = "‰º";
+    show_range_y_text = "ä¸Š";
+    hide_range_y_text = "ä¸‹";
   } else {
-    show_range_y_text = "‰º";
-    hide_range_y_text = "ã";
+    show_range_y_text = "ä¸‹";
+    hide_range_y_text = "ä¸Š";
   }
 
   setTextByClassName("show-range-x-text", show_range_x_text);
@@ -71,9 +71,9 @@ function setText() {
   setTextByClassName("hide-range-y-text", hide_range_y_text);
 
   /**
-   * w’è‚µ‚½ƒNƒ‰ƒX–¼‚ğ‚Â—v‘f‚ÌƒeƒLƒXƒg‚ğƒZƒbƒg‚·‚é
-   * @param {string} class_name ƒeƒLƒXƒg‚ğƒZƒbƒg‚·‚é—v‘f‚ÌƒNƒ‰ƒX–¼
-   * @param {string} text ƒZƒbƒg‚·‚é•¶š—ñ
+   * æŒ‡å®šã—ãŸã‚¯ãƒ©ã‚¹åã‚’æŒã¤è¦ç´ ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+   * @param {string} class_name ãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹è¦ç´ ã®ã‚¯ãƒ©ã‚¹å
+   * @param {string} text ã‚»ãƒƒãƒˆã™ã‚‹æ–‡å­—åˆ—
    */
   function setTextByClassName(class_name, text) {
     let elms = document.getElementsByClassName(class_name);
