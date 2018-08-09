@@ -1,9 +1,16 @@
 const DEFAULT_FORM_WIDTH = 0;
 const DEFAULT_FLOAT_HEIGHT = 100;
+const DEFAULT_FLOAT_WIDTH = 2;
 const DEFAULT_NO_HIDE_IF_TEXT = true;
 const DEFAULT_DEFAULT_HIDE_PIXEL = 1000;
 const DEFAULT_USE_MOUSE_CHECK = true;
 const DEFAULT_RANGE_TYPE_PIXEL = true;
+const DEFAULT_HIDE_AFTER_SUBMIT = false;
+const DEFAULT_LOCK_FLOAT_FORM = false;
+const DEFAULT_LEFT_TOP = false;
+const DEFAULT_RIGHT_TOP = false;
+const DEFAULT_LEFT_BOTTOM = false;
+const DEFAULT_RIGHT_BOTTOM = true;
 const DEFAULT_SHOW_RANGE_X_IN_PIXEL = 500;
 const DEFAULT_HIDE_RANGE_X_IN_PIXEL = 550;
 const DEFAULT_SHOW_RANGE_Y_IN_PIXEL = 500;
@@ -14,10 +21,17 @@ const DEFAULT_SHOW_RANGE_Y_IN_PERCENT = 50;
 const DEFAULT_HIDE_RANGE_Y_IN_PERCENT = 60;
 let form_width = DEFAULT_FORM_WIDTH;
 let float_height = DEFAULT_FLOAT_HEIGHT;
+let float_width = DEFAULT_FLOAT_WIDTH;
 let no_hide_if_text = DEFAULT_NO_HIDE_IF_TEXT;
 let default_hide_pixel = DEFAULT_DEFAULT_HIDE_PIXEL;
 let use_mouse_check = DEFAULT_USE_MOUSE_CHECK;
 let range_type_pixel = DEFAULT_RANGE_TYPE_PIXEL;
+let hide_after_submit = DEFAULT_HIDE_AFTER_SUBMIT;
+let lock_float_form = DEFAULT_LOCK_FLOAT_FORM;
+let left_top = DEFAULT_LEFT_TOP;
+let right_top = DEFAULT_RIGHT_TOP;
+let left_bottom = DEFAULT_LEFT_BOTTOM;
+let right_bottom = DEFAULT_RIGHT_BOTTOM;
 let show_range_x_in_pixel = DEFAULT_SHOW_RANGE_X_IN_PIXEL;
 let hide_range_x_in_pixel = DEFAULT_HIDE_RANGE_X_IN_PIXEL;
 let show_range_y_in_pixel = DEFAULT_SHOW_RANGE_Y_IN_PIXEL;
@@ -29,16 +43,19 @@ let hide_range_y_in_percent = DEFAULT_HIDE_RANGE_Y_IN_PERCENT;
 let form = null;
 let textarea = null;
 let toggle = null;
+let lock_button = null;
 let have_focus = false;
 let mx = 0;
 let my = 0;
 let locked = false;
+let right = right_top || right_bottom;
+let bottom = left_bottom || right_bottom;
 
 function onMouseMove(e) {
     mx = e.clientX;
     my = e.clientY;
 
-    if(locked){
+    if(!use_mouse_check || locked){
         return;
     }
 
@@ -73,16 +90,20 @@ function isHide(){
 function isShowable() {
     let cw = document.documentElement.clientWidth;
     let ch = document.documentElement.clientHeight;
+    let x = mx;
+    let y = my;
+    if (right) x = cw - mx;
+    if (bottom) y = ch - my;
 
     if (range_type_pixel) {
-        if ((cw - mx < show_range_x_in_pixel) && (ch - my < show_range_y_in_pixel)) {
+        if ((x < show_range_x_in_pixel) && (y < show_range_y_in_pixel)) {
             return true;
         } else {
             return false;
         }
     } else {
-        let px = 100.0 * (cw - mx) / cw;
-        let py = 100.0 * (ch - my) / ch;
+        let px = Math.abs(100.0 * x / cw);
+        let py = Math.abs(100.0 * y / ch);
 
         if ((px < show_range_x_in_percent) && (py < show_range_y_in_percent)) {
             return true;
@@ -96,6 +117,10 @@ function isShowable() {
 function isHidable() {
     let cw = document.documentElement.clientWidth;
     let ch = document.documentElement.clientHeight;
+    let x = mx;
+    let y = my;
+    if (right) x = cw - mx;
+    if (bottom) y = ch - my;
 
     if (no_hide_if_text) {
         if(have_focus){
@@ -107,15 +132,16 @@ function isHidable() {
         }
     }
 
+    if (!use_mouse_check) return true;
     if (range_type_pixel) {
-        if ((cw - mx > hide_range_x_in_pixel) || (ch - my > hide_range_y_in_pixel)) {
+        if ((x > hide_range_x_in_pixel) || (y > hide_range_y_in_pixel)) {
             return true;
         } else {
             return false;
         }
     } else {
-        let px = 100.0 * (cw - mx) / cw;
-        let py = 100.0 * (ch - my) / ch;
+        let px = Math.abs(100.0 * x / cw);
+        let py = Math.abs(100.0 * y / ch);
 
         if ((px > hide_range_x_in_percent) || (py > hide_range_y_in_percent)) {
             return true;
@@ -128,12 +154,24 @@ function isHidable() {
 function setFormStyle(form_display) {
     form.style = {};
     form.style.visibility = "visible";
-    form.style.zIndex = 2;
+    form.style.zIndex = 100;
     form.style.backgroundColor = "#FFFFEE";
     form.style.border = "solid 1px";
     form.style.position = "fixed";
-    form.style.right = "2px";
-    form.style.bottom = `${float_height + 30}px`;
+    if (right) {
+        form.style.left = "";
+        form.style.right = `${float_width}px`;
+    } else {
+        form.style.right = "";
+        form.style.left = `${float_width}px`;
+    }
+    if (bottom) {
+        form.style.top = "";
+        form.style.bottom = `${float_height + 30}px`;
+    } else {
+        form.style.bottom = "";
+        form.style.top = `${float_height + 28}px`;
+    }
     if (form_width > 0) {
         form.style.maxWidth = `${form_width}px`;
         form.style.width = `${form_width}px`;
@@ -158,8 +196,8 @@ function hide() {
 }
 
 function isForm(target) {
-    for (let elm = target.parentElement; elm; elm = elm.parentElement) {
-        if (elm.enctype == "multipart/form-data") return true;
+    for (let elm = target; elm; elm = elm.parentElement) {
+        if (elm.id == "ftbl") return true;
     }
     return false;
 }
@@ -175,10 +213,17 @@ function onError(error) {
 function onLoadSetting(result) {
     form_width = Number(safeGetValue(result.form_width, DEFAULT_FORM_WIDTH));
     float_height = Number(safeGetValue(result.float_height, DEFAULT_FLOAT_HEIGHT));
+    float_width = Number(safeGetValue(result.float_width, DEFAULT_FLOAT_WIDTH));
     no_hide_if_text = safeGetValue(result.no_hide_if_text, DEFAULT_NO_HIDE_IF_TEXT);
     default_hide_pixel = safeGetValue(result.default_hide_pixel, DEFAULT_DEFAULT_HIDE_PIXEL);
     use_mouse_check = safeGetValue(result.use_mouse_check, DEFAULT_USE_MOUSE_CHECK);
     range_type_pixel = safeGetValue(result.range_type_pixel, DEFAULT_RANGE_TYPE_PIXEL);
+    hide_after_submit = safeGetValue(result.hide_after_submit, DEFAULT_HIDE_AFTER_SUBMIT);
+    lock_float_form = safeGetValue(result.lock_float_form, DEFAULT_LOCK_FLOAT_FORM);
+    left_top = safeGetValue(result.left_top, DEFAULT_LEFT_TOP);
+    right_top = safeGetValue(result.right_top, DEFAULT_RIGHT_TOP);
+    left_bottom = safeGetValue(result.left_bottom, DEFAULT_LEFT_BOTTOM);
+    right_bottom = safeGetValue(result.right_bottom, DEFAULT_RIGHT_BOTTOM);
     show_range_x_in_pixel = safeGetValue(result.show_range_x_in_pixel, DEFAULT_SHOW_RANGE_X_IN_PIXEL);
     hide_range_x_in_pixel = safeGetValue(result.hide_range_x_in_pixel, DEFAULT_HIDE_RANGE_X_IN_PIXEL);
     show_range_y_in_pixel = safeGetValue(result.show_range_y_in_pixel, DEFAULT_SHOW_RANGE_Y_IN_PIXEL);
@@ -187,6 +232,9 @@ function onLoadSetting(result) {
     hide_range_x_in_percent = safeGetValue(result.hide_range_x_in_percent, DEFAULT_HIDE_RANGE_X_IN_PERCENT);
     show_range_y_in_percent = safeGetValue(result.show_range_y_in_percent, DEFAULT_SHOW_RANGE_Y_IN_PERCENT);
     hide_range_y_in_percent = safeGetValue(result.hide_range_y_in_percent, DEFAULT_HIDE_RANGE_Y_IN_PERCENT);
+
+    right = right_top || right_bottom;
+    bottom = left_bottom || right_bottom;
 
     main();
 }
@@ -198,9 +246,17 @@ function onChangeSetting(changes, areaName) {
 
     form_width = Number(safeGetValue(changes.form_width.newValue, form_width));
     float_height = Number(safeGetValue(changes.float_height.newValue, float_height));
+    float_width = Number(safeGetValue(changes.float_width.newValue, float_width));
     no_hide_if_text = safeGetValue(changes.no_hide_if_text.newValue, no_hide_if_text);
     default_hide_pixel = safeGetValue(changes.default_hide_pixel.newValue, DEFAULT_DEFAULT_HIDE_PIXEL);
+    use_mouse_check = safeGetValue(changes.use_mouse_check.newValue, DEFAULT_USE_MOUSE_CHECK);
     range_type_pixel = safeGetValue(changes.range_type_pixel.newValue, range_type_pixel);
+    hide_after_submit = safeGetValue(changes.hide_after_submit.newValue, DEFAULT_HIDE_AFTER_SUBMIT);
+    lock_float_form = safeGetValue(changes.lock_float_form.newValue, DEFAULT_LOCK_FLOAT_FORM);
+    left_top = safeGetValue(changes.left_top.newValue, DEFAULT_LEFT_TOP);
+    right_top = safeGetValue(changes.right_top.newValue, DEFAULT_RIGHT_TOP);
+    left_bottom = safeGetValue(changes.left_bottom.newValue, DEFAULT_LEFT_BOTTOM);
+    right_bottom = safeGetValue(changes.right_bottom.newValue, DEFAULT_RIGHT_BOTTOM);
     show_range_x_in_pixel = safeGetValue(changes.show_range_x_in_pixel.newValue, show_range_x_in_pixel);
     hide_range_x_in_pixel = safeGetValue(changes.hide_range_x_in_pixel.newValue, hide_range_x_in_pixel);
     show_range_y_in_pixel = safeGetValue(changes.show_range_y_in_pixel.newValue, show_range_y_in_pixel);
@@ -210,8 +266,41 @@ function onChangeSetting(changes, areaName) {
     show_range_y_in_percent = safeGetValue(changes.show_range_y_in_percent.newValue, show_range_y_in_percent);
     hide_range_y_in_percent = safeGetValue(changes.hide_range_y_in_percent.newValue, hide_range_y_in_percent);
 
-    form.style.bottom = `${float_height + 30}px`;
-    toggle.style.bottom = `${float_height}px`;
+    right = right_top || right_bottom;
+    bottom = left_bottom || right_bottom;
+
+    if (right) {
+        form.style.left = "";
+        form.style.right = `${float_width}px`;
+        lock_button.style.left = "";
+        lock_button.style.right = `${float_width}px`;
+        toggle.style.left = "";
+        toggle.style.right = `${float_width + 26}px`;
+    } else {
+        form.style.right = "";
+        form.style.left = `${float_width}px`;
+        lock_button.style.right = "";
+        lock_button.style.left = `${float_width}px`;
+        toggle.style.right = "";
+        toggle.style.left = `${float_width + 26}px`;
+    }
+
+    if (bottom) {
+        form.style.top = "";
+        form.style.bottom = `${float_height + 30}px`;
+        lock_button.style.top = "";
+        lock_button.style.bottom = `${float_height + 2}px`;
+        toggle.style.top = "";
+        toggle.style.bottom = `${float_height}px`;
+    } else {
+        form.style.bottom = "";
+        form.style.top = `${float_height + 28}px`;
+        lock_button.style.bottom = "";
+        lock_button.style.top = `${float_height}px`;
+        toggle.style.bottom = "";
+        toggle.style.top = `${float_height + 4}px`;
+    }
+
     if (form_width > 0) {
         form.style.maxWidth = `${form_width}px`;
         form.style.width = `${form_width}px`;
@@ -228,20 +317,35 @@ function onChangeSetting(changes, areaName) {
 function main() {
     form = document.getElementById("ftbl");
     textarea = document.getElementById("ftxa");
+    toggle = document.getElementById("KOSHIAN_float_form_toggle");
+    if (toggle) toggle.parentElement.removeChild(toggle);
     toggle = document.createElement("input");
-    let lock_button = document.createElement("div");
+    toggle.id = "KOSHIAN_float_form_toggle";
+    locked = lock_float_form;
+    lock_button = document.getElementById("KOSHIAN_float_form_lock_button");
+    if (lock_button) lock_button.parentElement.removeChild(lock_button);
+    lock_button = document.createElement("div");
+    lock_button.id = "KOSHIAN_float_form_lock_button";
     lock_button.style.position = "fixed";
-    lock_button.style.right = "2px";
-    lock_button.style.bottom = `${float_height + 2}px`;
+    if (right) {
+        lock_button.style.right = `${float_width}px`;
+    } else {
+        lock_button.style.left = `${float_width}px`;
+    }
+    if (bottom) {
+        lock_button.style.bottom = `${float_height + 2}px`;
+    } else {
+        lock_button.style.top = `${float_height}px`;
+    }
     lock_button.style.width = `24px`;
     lock_button.style.height = `24px`;
     let icon_unlock = document.createElement("img");
     icon_unlock.src = browser.extension.getURL("icons/key_unlock.png");
-    icon_unlock.hidden = false;
+    icon_unlock.hidden = locked;
     icon_unlock.style.width = "100%";
     let icon_lock = document.createElement("img");
     icon_lock.src = browser.extension.getURL("icons/key_lock.png");
-    icon_lock.hidden = true;
+    icon_lock.hidden = !locked;
     icon_lock.style.width = "100%";
 
     lock_button.onclick = (e) => {
@@ -265,8 +369,16 @@ function main() {
     }
 
     toggle.style.position = "fixed";
-    toggle.style.right = "28px";
-    toggle.style.bottom = `${float_height}px`;
+    if (right) {
+        toggle.style.right = `${float_width + 26}px`;
+    } else {
+        toggle.style.left = `${float_width + 26}px`;
+    }
+    if (bottom) {
+        toggle.style.bottom = `${float_height}px`;
+    } else {
+        toggle.style.top = `${float_height + 4}px`;
+    }
     toggle.style.display = "block";
     toggle.type = "button";
     toggle.onclick = (e) => {
@@ -292,9 +404,7 @@ function main() {
     textarea.addEventListener("focus", onFocus);
     textarea.addEventListener("blur", onBlur);
 
-    if (use_mouse_check) {
-        window.addEventListener("mousemove", onMouseMove);
-    }
+    window.addEventListener("mousemove", onMouseMove);
 
     // フォーム位置切り替えを無効化
     let switch_form = document.getElementById("reszb");
@@ -337,6 +447,9 @@ function main() {
     }, 1000);
 
     document.addEventListener("KOSHIAN_quote", show);
+    document.addEventListener("KOSHIAN_form_loaded", () => {
+        if (hide_after_submit) hide();
+    });
 
     document.addEventListener("click", (e) => {
         if (e.target == toggle || e.target == icon_lock || e.target == icon_unlock) return;
