@@ -170,7 +170,7 @@ function setFormStyle(form_display) {
         form.style.bottom = `${float_height + 27}px`;
     } else {
         form.style.bottom = "";
-        form.style.top = `${float_height + 26}px`;
+        form.style.top = `${float_height + 27}px`;
     }
     if (form_width > 0) {
         form.style.maxWidth = `${form_width}px`;
@@ -294,9 +294,9 @@ function onChangeSetting(changes, areaName) {
         toggle.style.bottom = `${float_height}px`;
     } else {
         form.style.bottom = "";
-        form.style.top = `${float_height + 26}px`;
+        form.style.top = `${float_height + 27}px`;
         lock_button.style.bottom = "";
-        lock_button.style.top = `${float_height}px`;
+        lock_button.style.top = `${float_height + 1}px`;
         toggle.style.bottom = "";
         toggle.style.top = `${float_height}px`;
     }
@@ -335,7 +335,7 @@ function main() {
     if (bottom) {
         lock_button.style.bottom = `${float_height + 1}px`;
     } else {
-        lock_button.style.top = `${float_height}px`;
+        lock_button.style.top = `${float_height + 1}px`;
     }
     lock_button.style.width = `24px`;
     lock_button.style.height = `24px`;
