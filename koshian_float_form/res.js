@@ -55,7 +55,7 @@ function onMouseMove(e) {
     mx = e.clientX;
     my = e.clientY;
 
-    if(locked){
+    if(!use_mouse_check || locked){
         return;
     }
 
@@ -154,7 +154,7 @@ function isHidable() {
 function setFormStyle(form_display) {
     form.style = {};
     form.style.visibility = "visible";
-    form.style.zIndex = 2;
+    form.style.zIndex = 100;
     form.style.backgroundColor = "#FFFFEE";
     form.style.border = "solid 1px";
     form.style.position = "fixed";
@@ -196,8 +196,8 @@ function hide() {
 }
 
 function isForm(target) {
-    for (let elm = target.parentElement; elm; elm = elm.parentElement) {
-        if (elm.enctype == "multipart/form-data") return true;
+    for (let elm = target; elm; elm = elm.parentElement) {
+        if (elm.id == "ftbl") return true;
     }
     return false;
 }
@@ -404,9 +404,7 @@ function main() {
     textarea.addEventListener("focus", onFocus);
     textarea.addEventListener("blur", onBlur);
 
-    if (use_mouse_check) {
-        window.addEventListener("mousemove", onMouseMove);
-    }
+    window.addEventListener("mousemove", onMouseMove);
 
     // フォーム位置切り替えを無効化
     let switch_form = document.getElementById("reszb");
