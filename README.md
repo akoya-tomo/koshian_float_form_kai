@@ -30,7 +30,7 @@
 
 ## インストール
 **GitHub**  
-[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.3.0/koshian_float_form_kai-1.3.0-an+fx.xpi)
+[![インストールボタン](images/install_button.png "クリックでアドオンをインストール")](https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.3.1/koshian_float_form_kai-1.3.1-an+fx.xpi)
 
 ※「接続エラーのため、アドオンをダウンロードできませんでした。」と表示されてインストール出来ないときはインストールボタンを右クリックしてxpiファイルをダウンロードし、メニューのツール→アドオン（またはCtrl+Shift+A）で表示されたアドオンマネージャーのページにxpiファイルをドラッグ＆ドロップして下さい。  
 
@@ -43,6 +43,8 @@
   Firefox60以上では「プライバシーとセキュリティ」の「Cookieとサイトデータ」の「データを管理」からimg.2chan.netやmay.2chan.netのCookieを削除してください。
 
 ## 更新履歴
+* v1.3.1 2018-08-09
+  - 返信フォームの位置を微調整  
 * v1.3.0 2018-08-09
   - 返信フォームの位置を変更する機能を追加  
   - 返信後に返信フォームを隠す機能を追加  
