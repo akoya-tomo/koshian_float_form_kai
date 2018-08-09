@@ -6,6 +6,7 @@ const DEFAULT_DEFAULT_HIDE_PIXEL = 1000;
 const DEFAULT_USE_MOUSE_CHECK = true;
 const DEFAULT_RANGE_TYPE_PIXEL = true;
 const DEFAULT_HIDE_AFTER_SUBMIT = false;
+const DEFAULT_LOCK_FLOAT_FORM = false;
 const DEFAULT_LEFT_TOP = false;
 const DEFAULT_RIGHT_TOP = false;
 const DEFAULT_LEFT_BOTTOM = false;
@@ -26,6 +27,7 @@ let default_hide_pixel = DEFAULT_DEFAULT_HIDE_PIXEL;
 let use_mouse_check = DEFAULT_USE_MOUSE_CHECK;
 let range_type_pixel = DEFAULT_RANGE_TYPE_PIXEL;
 let hide_after_submit = DEFAULT_HIDE_AFTER_SUBMIT;
+let lock_float_form = DEFAULT_LOCK_FLOAT_FORM;
 let left_top = DEFAULT_LEFT_TOP;
 let right_top = DEFAULT_RIGHT_TOP;
 let left_bottom = DEFAULT_LEFT_BOTTOM;
@@ -217,6 +219,7 @@ function onLoadSetting(result) {
     use_mouse_check = safeGetValue(result.use_mouse_check, DEFAULT_USE_MOUSE_CHECK);
     range_type_pixel = safeGetValue(result.range_type_pixel, DEFAULT_RANGE_TYPE_PIXEL);
     hide_after_submit = safeGetValue(result.hide_after_submit, DEFAULT_HIDE_AFTER_SUBMIT);
+    lock_float_form = safeGetValue(result.lock_float_form, DEFAULT_LOCK_FLOAT_FORM);
     left_top = safeGetValue(result.left_top, DEFAULT_LEFT_TOP);
     right_top = safeGetValue(result.right_top, DEFAULT_RIGHT_TOP);
     left_bottom = safeGetValue(result.left_bottom, DEFAULT_LEFT_BOTTOM);
@@ -249,6 +252,7 @@ function onChangeSetting(changes, areaName) {
     use_mouse_check = safeGetValue(changes.use_mouse_check.newValue, DEFAULT_USE_MOUSE_CHECK);
     range_type_pixel = safeGetValue(changes.range_type_pixel.newValue, range_type_pixel);
     hide_after_submit = safeGetValue(changes.hide_after_submit.newValue, DEFAULT_HIDE_AFTER_SUBMIT);
+    lock_float_form = safeGetValue(changes.lock_float_form.newValue, DEFAULT_LOCK_FLOAT_FORM);
     left_top = safeGetValue(changes.left_top.newValue, DEFAULT_LEFT_TOP);
     right_top = safeGetValue(changes.right_top.newValue, DEFAULT_RIGHT_TOP);
     left_bottom = safeGetValue(changes.left_bottom.newValue, DEFAULT_LEFT_BOTTOM);
@@ -337,11 +341,11 @@ function main() {
     lock_button.style.height = `24px`;
     let icon_unlock = document.createElement("img");
     icon_unlock.src = browser.extension.getURL("icons/key_unlock.png");
-    icon_unlock.hidden = false;
+    icon_unlock.hidden = locked;
     icon_unlock.style.width = "100%";
     let icon_lock = document.createElement("img");
     icon_lock.src = browser.extension.getURL("icons/key_lock.png");
-    icon_lock.hidden = true;
+    icon_lock.hidden = !locked;
     icon_lock.style.width = "100%";
 
     lock_button.onclick = (e) => {
