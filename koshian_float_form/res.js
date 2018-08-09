@@ -296,7 +296,7 @@ function onChangeSetting(changes, areaName) {
         form.style.bottom = "";
         form.style.top = `${float_height + 28}px`;
         lock_button.style.bottom = "";
-        lock_button.style.top = `${float_height + 1}px`;
+        lock_button.style.top = `${float_height + 2}px`;
         toggle.style.bottom = "";
         toggle.style.top = `${float_height}px`;
     }
@@ -335,7 +335,7 @@ function main() {
     if (bottom) {
         lock_button.style.bottom = `${float_height + 2}px`;
     } else {
-        lock_button.style.top = `${float_height + 1}px`;
+        lock_button.style.top = `${float_height + 2}px`;
     }
     lock_button.style.width = `24px`;
     lock_button.style.height = `24px`;
