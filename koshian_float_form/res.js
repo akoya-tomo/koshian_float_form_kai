@@ -170,7 +170,7 @@ function setFormStyle(form_display) {
         form.style.bottom = `${float_height + 28}px`;
     } else {
         form.style.bottom = "";
-        form.style.top = `${float_height + 27}px`;
+        form.style.top = `${float_height + 28}px`;
     }
     if (form_width > 0) {
         form.style.maxWidth = `${form_width}px`;
@@ -294,7 +294,7 @@ function onChangeSetting(changes, areaName) {
         toggle.style.bottom = `${float_height}px`;
     } else {
         form.style.bottom = "";
-        form.style.top = `${float_height + 27}px`;
+        form.style.top = `${float_height + 28}px`;
         lock_button.style.bottom = "";
         lock_button.style.top = `${float_height + 1}px`;
         toggle.style.bottom = "";
