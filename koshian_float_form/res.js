@@ -7,6 +7,7 @@ const DEFAULT_USE_MOUSE_CHECK = true;
 const DEFAULT_RANGE_TYPE_PIXEL = true;
 const DEFAULT_HIDE_AFTER_SUBMIT = false;
 const DEFAULT_LOCK_FLOAT_FORM = false;
+const DEFAULT_USE_IME_CONTROL = false;
 const DEFAULT_LEFT_TOP = false;
 const DEFAULT_RIGHT_TOP = false;
 const DEFAULT_LEFT_BOTTOM = false;
@@ -28,6 +29,7 @@ let use_mouse_check = DEFAULT_USE_MOUSE_CHECK;
 let range_type_pixel = DEFAULT_RANGE_TYPE_PIXEL;
 let hide_after_submit = DEFAULT_HIDE_AFTER_SUBMIT;
 let lock_float_form = DEFAULT_LOCK_FLOAT_FORM;
+let use_ime_control = DEFAULT_USE_IME_CONTROL;
 let left_top = DEFAULT_LEFT_TOP;
 let right_top = DEFAULT_RIGHT_TOP;
 let left_bottom = DEFAULT_LEFT_BOTTOM;
@@ -220,6 +222,7 @@ function onLoadSetting(result) {
     range_type_pixel = safeGetValue(result.range_type_pixel, DEFAULT_RANGE_TYPE_PIXEL);
     hide_after_submit = safeGetValue(result.hide_after_submit, DEFAULT_HIDE_AFTER_SUBMIT);
     lock_float_form = safeGetValue(result.lock_float_form, DEFAULT_LOCK_FLOAT_FORM);
+    use_ime_control = safeGetValue(result.use_ime_control, DEFAULT_USE_IME_CONTROL);
     left_top = safeGetValue(result.left_top, DEFAULT_LEFT_TOP);
     right_top = safeGetValue(result.right_top, DEFAULT_RIGHT_TOP);
     left_bottom = safeGetValue(result.left_bottom, DEFAULT_LEFT_BOTTOM);
@@ -253,6 +256,7 @@ function onChangeSetting(changes, areaName) {
     range_type_pixel = safeGetValue(changes.range_type_pixel.newValue, range_type_pixel);
     hide_after_submit = safeGetValue(changes.hide_after_submit.newValue, DEFAULT_HIDE_AFTER_SUBMIT);
     lock_float_form = safeGetValue(changes.lock_float_form.newValue, DEFAULT_LOCK_FLOAT_FORM);
+    use_ime_control = safeGetValue(changes.use_ime_control.newValue, DEFAULT_USE_IME_CONTROL);
     left_top = safeGetValue(changes.left_top.newValue, DEFAULT_LEFT_TOP);
     right_top = safeGetValue(changes.right_top.newValue, DEFAULT_RIGHT_TOP);
     left_bottom = safeGetValue(changes.left_bottom.newValue, DEFAULT_LEFT_BOTTOM);
@@ -312,6 +316,7 @@ function onChangeSetting(changes, areaName) {
         textarea.style.width = "";
     }
 
+    textarea.style.imeMode = use_ime_control ? "active" : "auto";
 }
 
 function main() {
@@ -390,6 +395,8 @@ function main() {
     };
 
     document.body.appendChild(toggle);
+
+    textarea.style.imeMode = use_ime_control ? "active" : "auto";
 
     window.addEventListener("resize", (e) => {
         setFormStyle(form.style.display);

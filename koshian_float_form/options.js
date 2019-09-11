@@ -6,6 +6,7 @@ const DEFAULT_USE_MOUSE_CHECK = true;
 const DEFAULT_RANGE_TYPE_PIXEL = true;
 const DEFAULT_HIDE_AFTER_SUBMIT = false;
 const DEFAULT_LOCK_FLOAT_FORM = false;
+const DEFAULT_USE_IME_CONTROL = false;
 const DEFAULT_LEFT_TOP = false;
 const DEFAULT_RIGHT_TOP = false;
 const DEFAULT_LEFT_BOTTOM = false;
@@ -98,6 +99,7 @@ function saveOptions() {
     range_type_pixel: document.querySelector("#range_type_pixel").checked,
     hide_after_submit: document.querySelector("#hide_after_submit").checked,
     lock_float_form: document.querySelector("#lock_float_form").checked,
+    use_ime_control: document.querySelector("#use_ime_control").checked,
     left_top: document.querySelector("#left_top").checked,
     right_top: document.querySelector("#right_top").checked,
     left_bottom: document.querySelector("#left_bottom").checked,
@@ -123,6 +125,7 @@ function setCurrentChoice(result) {
   document.querySelector("#range_type_pixel").checked = safeGetValue(result.range_type_pixel, DEFAULT_RANGE_TYPE_PIXEL);
   document.querySelector("#hide_after_submit").checked = safeGetValue(result.hide_after_submit, DEFAULT_HIDE_AFTER_SUBMIT);
   document.querySelector("#lock_float_form").checked = safeGetValue(result.lock_float_form, DEFAULT_LOCK_FLOAT_FORM);
+  document.querySelector("#use_ime_control").checked = safeGetValue(result.use_ime_control, DEFAULT_USE_IME_CONTROL);
   document.querySelector("#left_top").checked = safeGetValue(result.left_top, DEFAULT_LEFT_TOP);
   document.querySelector("#right_top").checked = safeGetValue(result.right_top, DEFAULT_RIGHT_TOP);
   document.querySelector("#left_bottom").checked = safeGetValue(result.left_bottom, DEFAULT_LEFT_BOTTOM);
