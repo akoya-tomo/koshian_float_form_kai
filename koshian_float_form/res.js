@@ -453,7 +453,11 @@ function main() {
         }
     }, 1000);
 
-    document.addEventListener("KOSHIAN_quote", show);
+    document.addEventListener("KOSHIAN_quote", () => {
+        show();
+        textarea.focus();
+    });
+
     document.addEventListener("KOSHIAN_form_loaded", () => {
         if (hide_after_submit) hide();
     });
