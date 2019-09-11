@@ -322,13 +322,19 @@ function onChangeSetting(changes, areaName) {
 function main() {
     form = document.getElementById("ftbl");
     textarea = document.getElementById("ftxa");
+
     toggle = document.getElementById("KOSHIAN_float_form_toggle");
-    if (toggle) toggle.parentElement.removeChild(toggle);
+    if (toggle) {
+        toggle.parentElement.removeChild(toggle);
+    }
     toggle = document.createElement("input");
     toggle.id = "KOSHIAN_float_form_toggle";
+
     locked = lock_float_form;
     lock_button = document.getElementById("KOSHIAN_float_form_lock_button");
-    if (lock_button) lock_button.parentElement.removeChild(lock_button);
+    if (lock_button) {
+        lock_button.parentElement.removeChild(lock_button);
+    }
     lock_button = document.createElement("div");
     lock_button.id = "KOSHIAN_float_form_lock_button";
     lock_button.style.position = "fixed";
@@ -344,10 +350,12 @@ function main() {
     }
     lock_button.style.width = `24px`;
     lock_button.style.height = `24px`;
+
     let icon_unlock = document.createElement("img");
     icon_unlock.src = browser.extension.getURL("icons/key_unlock.png");
     icon_unlock.hidden = locked;
     icon_unlock.style.width = "100%";
+
     let icon_lock = document.createElement("img");
     icon_lock.src = browser.extension.getURL("icons/key_lock.png");
     icon_lock.hidden = !locked;
@@ -459,11 +467,16 @@ function main() {
     });
 
     document.addEventListener("KOSHIAN_form_loaded", () => {
-        if (hide_after_submit) hide();
+        if (hide_after_submit) {
+            hide();
+        }
     });
 
     document.addEventListener("click", (e) => {
-        if (e.target == toggle || e.target == icon_lock || e.target == icon_unlock) return;
+        if (e.target == toggle || e.target == icon_lock || e.target == icon_unlock) {
+            return;
+        }
+
         if (!locked && isShow() && isHidable() && !isForm(e.target)) {
             hide();
         }
