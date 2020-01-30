@@ -2,9 +2,9 @@
   "addons": {
     "koshian_float_form_kai@akoya-tomo.github.io": {
       "updates": [
-        { "version": "1.4.0", 
-          "update_link": "https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.4.0/koshian_float_form_kai-1.4.0-fx.xpi",
-          "update_info_url": "https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.4.0/update_info.html"
+        { "version": "1.5.0", 
+          "update_link": "https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.5.0/koshian_float_form_kai-1.5.0-fx.xpi",
+          "update_info_url": "https://github.com/akoya-tomo/koshian_float_form_kai/releases/download/v1.5.0/update_info.html"
         }
       ]
     }

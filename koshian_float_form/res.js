@@ -473,11 +473,36 @@ function main() {
     });
 
     document.addEventListener("click", (e) => {
-        if (e.target == toggle || e.target == icon_lock || e.target == icon_unlock) {
+        let target = e.target;
+        if (target == toggle || target == icon_lock || target == icon_unlock) {
             return;
         }
 
-        if (!locked && isShow() && isHidable() && !isForm(e.target)) {
+        if (target && target.nodeType == Node.ELEMENT_NODE) {
+            if (target.classList.contains("pdms")) {
+                // 記事番号プルダウンメニュー
+                switch (target.textContent) {
+                    case "本文を引用":
+                    case "発言No.を引用":
+                    case "画像ファイル名を引用":
+                        show();
+                        textarea.focus();
+                        break;
+                }
+                return;
+            } else if (target.classList.contains("slp1")) {
+                // 選択文字列引用ポップアップボタン
+                switch (target.textContent) {
+                    case "引用する":
+                        show();
+                        textarea.focus();
+                        break;
+                }
+                return;
+            }
+        }
+    
+        if (!locked && isShow() && isHidable() && !isForm(target)) {
             hide();
         }
     });
